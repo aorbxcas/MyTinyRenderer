@@ -1,22 +1,49 @@
 #pragma once
-#include "tgaimage.h"
+#include "model.h"
+struct IShader {
+    virtual ~IShader();
+    virtual Vec4f vertex(int iface, int nthvert) = 0;
+    virtual bool fragment(Vec3f bar, TGAColor &color) = 0;
+};
+
 enum LineType
 {
     DDA,
     Breshman,
 };
 
-void Line(int x1,int y1,int x2,int y2,TGAImage image,TGAColor color,LineType type) {
-    switch (type) {
-    case DDA:
-        for (float t = 0.; t < 1.; t += .01) {
-            int x = x1 + (x2 - x1) * t;
-            int y = y1 + (y2 - y1) * t;
-            image.set(x, y, color);
-        }
-        break;
-    case Breshman:
-        break;
-    }
+float CaluateCrossValue(Vec2i a, Vec2i b);
 
-}
+float CaluateDot(Vec3f a, Vec3f b);
+
+Vec3f CaluateCross(Vec3f a, Vec3f b);
+
+bool CheckPointInTringle(Vec2i a, Vec2i b, Vec2i p);
+
+void Line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color, LineType type);
+
+float CheckPointInLine(Vec2i a, Vec2i b, Vec2i p);
+
+bool CheckPointInTrigle(Vec2i a, Vec2i b, Vec2i c, Vec2i p);
+
+void TringleSet(Vec2i t0, Vec2i t1, Vec2i t2, TGAImage &image, TGAColor color,int width,int height);
+
+void TringleSet(Vec3i t0, Vec3i t1, Vec3i t2, TGAImage &image, TGAColor color,float *zbuffer);
+
+void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer,float intensity);
+
+
+// 引申
+
+extern Matrix ModelView;
+extern Matrix Viewport;
+extern Matrix Projection;
+
+
+
+void viewport(int x, int y, int w, int h);
+void projection(float coeff=0.f); // coeff = -1/c
+void lookat(Vec3f eye, Vec3f center, Vec3f up);
+void Tringle(Model* model,IShader &shader, TGAImage &image,Vec3f light_dir);
+
+

@@ -7,16 +7,47 @@
       "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\shape.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\tgaimage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\shape.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\shape.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\Main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\tgaimage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\model.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\tgaimage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{E869684F-9854-4707-88F3-632A4B3882D4}|MyTinyRenderer\\MyTinyRenderer.vcxproj|solutionrelative:MyTinyRenderer\\geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\geometry.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +57,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,16 +69,97 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "tgaimage.h",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.h",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\tgaimage.h",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.h",
+              "RelativeToolTip": "MyTinyRenderer\\tgaimage.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-05T15:19:30.315Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "tgaimage.cpp",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\tgaimage.cpp",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp",
+              "RelativeToolTip": "MyTinyRenderer\\tgaimage.cpp",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAuwKgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-05T15:06:30.482Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "model.cpp",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.cpp",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\model.cpp",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.cpp",
+              "RelativeToolTip": "MyTinyRenderer\\model.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-05T15:05:48.779Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "tgaimage.cpp",
+              "DocumentMoniker": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.cpp",
+              "ToolTip": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-05T14:40:15.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "model.h",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.h",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\model.h",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\model.h",
+              "RelativeToolTip": "MyTinyRenderer\\model.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-05T14:26:42.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "shape.cpp",
               "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\shape.cpp",
               "RelativeDocumentMoniker": "MyTinyRenderer\\shape.cpp",
               "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\shape.cpp",
               "RelativeToolTip": "MyTinyRenderer\\shape.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAACAAAAAAAAAAAAA1wC0AAAA9AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-01T16:28:16.499Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-01T16:28:16.499Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Main.cpp",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\Main.cpp",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\Main.cpp",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\Main.cpp",
+              "RelativeToolTip": "MyTinyRenderer\\Main.cpp",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAB0AAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-07-05T14:09:34.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "geometry.h",
+              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\geometry.h",
+              "RelativeDocumentMoniker": "MyTinyRenderer\\geometry.h",
+              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\geometry.h",
+              "RelativeToolTip": "MyTinyRenderer\\geometry.h",
+              "ViewState": "AgIAABoAAAAAAAAAAAA1wCUAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-05T14:29:58.554Z"
             },
             {
               "$type": "Document",
@@ -57,36 +169,50 @@
               "RelativeDocumentMoniker": "MyTinyRenderer\\shape.h",
               "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\shape.h",
               "RelativeToolTip": "MyTinyRenderer\\shape.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-06-01T16:28:07.831Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 9,
               "Title": "tgaimage.h",
-              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.h",
-              "RelativeDocumentMoniker": "MyTinyRenderer\\tgaimage.h",
-              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.h",
-              "RelativeToolTip": "MyTinyRenderer\\tgaimage.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAlAAAAAAAAAA==",
+              "DocumentMoniker": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.h",
+              "ToolTip": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\tgaimage.h",
+              "ViewState": "AgIAAEMAAAAAAAAAAAA1wGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-06-01T16:01:59.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-05T14:40:07.055Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "tgaimage.cpp",
-              "DocumentMoniker": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp",
-              "RelativeDocumentMoniker": "MyTinyRenderer\\tgaimage.cpp",
-              "ToolTip": "D:\\DevProject\\ForkPro\\MyTinyRenderer\\MyTinyRenderer\\MyTinyRenderer\\tgaimage.cpp",
-              "RelativeToolTip": "MyTinyRenderer\\tgaimage.cpp",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAAAAQAAABQAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "geometry.h",
+              "DocumentMoniker": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\geometry.h",
+              "ToolTip": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\geometry.h",
+              "ViewState": "AgIAABoAAAAAAAAAAAA1wDcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-05T14:04:38.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "model.cpp",
+              "DocumentMoniker": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.cpp",
+              "ToolTip": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.cpp",
+              "ViewState": "AgIAABkAAAAAAAAAAAA1wDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-06-01T16:01:34.766Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-05T14:38:40.384Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "model.h",
+              "DocumentMoniker": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.h",
+              "ToolTip": "C:\\Users\\aorb\\Downloads\\tinyrenderer-f6fecb7ad493264ecd15e230411bfb1cca539a12\\model.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-07-05T14:38:22.624Z"
             }
           ]
         }
