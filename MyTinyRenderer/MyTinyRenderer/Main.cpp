@@ -21,10 +21,9 @@ struct GouraudShader : public IShader {
     virtual Vec4f vertex(int iface, int nthvert) {
         Vec4f gl_Vertex = embed<4>(model->vert(iface, nthvert)); // read the vertex from .obj file
         gl_Vertex = Viewport*Projection*ModelView*gl_Vertex;     // transform it to screen coordinates
-        Vec3f s = model->normal(iface, nthvert);
-        //varying_intensity[nthvert] = std::max(0.f, model->normal(iface, nthvert)*light_dir); // get diffuse lighting intensity
-        Vec3f normalFilter = Vec3f(std::max(0.f,model->normal(iface, nthvert).x), std::max(0.f,model->normal(iface, nthvert).y), std::max(0.f,model->normal(iface, nthvert).z));
-        varying_intensity[nthvert] = normalFilter*light_dir; // get diffuse lighting intensity
+        varying_intensity[nthvert] = std::max(0.f, model->normal(iface, nthvert)*light_dir); // get diffuse lighting intensity
+        //Vec3f normalFilter = Vec3f(std::max(0.f,model->normal(iface, nthvert).x), std::max(0.f,model->normal(iface, nthvert).y), std::max(0.f,model->normal(iface, nthvert).z));
+        //varying_intensity[nthvert] = normalFilter*light_dir; // get diffuse lighting intensity
         return gl_Vertex;
     }
 

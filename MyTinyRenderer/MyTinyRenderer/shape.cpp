@@ -1,6 +1,7 @@
 
 #pragma once
 #include "shape.h"
+#include <iostream>
 
 IShader::~IShader() {}
 
@@ -168,7 +169,7 @@ void TringleSet(Vec3i t0, Vec3i t1, Vec3i t2, TGAImage &image, TGAColor color,fl
 }
 
 // 带着色
-void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer,float intensity) {
+void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer) {
     Vec2f bboxmin( std::numeric_limits<float>::max(),  std::numeric_limits<float>::max());
     Vec2f bboxmax(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
     for (int i=0; i<3; i++) {
@@ -177,6 +178,11 @@ void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer,fl
             bboxmax[j] = std::max(bboxmax[j], pts[i][j]);
         }
     }
+    //std::cout<<"Tringle:"<<std::endl;
+    // for (int i=0; i<3; i++)
+    // {
+    //     std::cout<<pts[i].x<<"--"<<pts[i].y<<"--"<<pts[i].z<<std::endl;
+    // }
     Vec3i P;
     TGAColor color;
     for (P.x=bboxmin.x; P.x<=bboxmax.x; P.x++) {
@@ -187,10 +193,17 @@ void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer,fl
                 float alpha,beta,gamma;
                 Barycentric(pts[0], pts[1], pts[2], P, alpha, beta, gamma);
                 // 计算深度值
+                if (alpha<0||beta<0||gamma<0)continue;
                 float z = alpha * pts[0].z + beta * pts[1].z + gamma * pts[2].z;
                 P.z = z;
                 bool discard = shader.fragment(Vec3f(alpha,beta,gamma), color);
                 if (zbuffer[int(P.x+P.y*image.get_width())]<P.z&&!discard) {
+                    // if (zbuffer[int(P.x+P.y*image.get_width())]!=0)
+                    // {
+                    //     std::cout<<"Position:x:"<<P.x<<";y:"<<P.y<<"\nzBuffer:"<<zbuffer[int(P.x+P.y*image.get_width())]<<"--->"<<P.z<<std::endl;
+                    //     image.set(P.x,P.y,TGAColor(255,0,0,255));
+                    //     continue;
+                    // }
                     zbuffer[int(P.x+P.y*image.get_width())] = P.z;
                     image.set(P.x, P.y, color);
                 }
@@ -272,29 +285,22 @@ void Tringle(Model* model,IShader &shader,TGAImage &image,Vec3f light_dir)
 {
     int width = image.get_width();
     int height = image.get_height();
-    float *zBuffer = new float[width*height];
-    
+    float *zBuffer = new float[width*height]();
+
     for (int i = 0; i < model->nfaces(); i++) {
         std::vector<int> face = model->face(i);
-        Vec3i screen_coords[3];
+        //Vec3f screen_coords[3];
         Vec3f world_coords[3];
         Vec4f pts_proj_4[3];
         Vec3f pts_proj_3[3];
         for (int j = 0; j < 3; j++) {
             pts_proj_4[j] = shader.vertex(i, j);
             pts_proj_3[j] = proj<3>(pts_proj_4[j]);
-            Vec3f world_coord = model->vert(face[j]); 
-            screen_coords[j] = Vec3i((world_coord.x+1.)*width/2., (world_coord.y+1.)*height/2.,0);
+            Vec3f world_coord = pts_proj_3[j]; 
+            //screen_coords[j] = Vec3i((world_coord.x+1.)*width/2., (world_coord.y+1.)*height/2.,0);
             world_coords[j]  = world_coord;
         }
-        Vec3f n = CaluateCross(world_coords[2]-world_coords[0],world_coords[1]-world_coords[0]);
-        n.normalize();
-        float intensity = CaluateDot(n,light_dir);
-        //Vec3f pts[3] = {screen_coords[0],screen_coords[1],screen_coords[2]};
-        //Vec3f* pts = new Vec3f[3]{screen_coords[0],screen_coords[1],screen_coords[2]};
-        if (intensity > 0) {
-            TriangleSet(pts_proj_3,shader,image,zBuffer,intensity);
-        }
+        TriangleSet(pts_proj_3,shader,image,zBuffer);
     }
 }
 // void Tringle(Vec4f* pts, TGAImage &image, TGAImage &zbuffer)

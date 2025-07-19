@@ -30,7 +30,7 @@ void TringleSet(Vec2i t0, Vec2i t1, Vec2i t2, TGAImage &image, TGAColor color,in
 
 void TringleSet(Vec3i t0, Vec3i t1, Vec3i t2, TGAImage &image, TGAColor color,float *zbuffer);
 
-void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer,float intensity);
+void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer);
 
 
 // 引申
