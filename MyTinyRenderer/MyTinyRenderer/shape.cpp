@@ -103,31 +103,57 @@ void TringleSet(Vec2i t0, Vec2i t1, Vec2i t2, TGAImage &image, TGAColor color,in
         }
     }
 }
-// 判断点是否在三角形内
+// 判断点是否在三角形内，返回三角形重心坐标
 bool Barycentric(Vec3i a, Vec3i b, Vec3i c, Vec3i p, float &u, float &v, float &w)
 {
-    // 向量差
-    Vec3i v0 = b - a;
-    Vec3i v1 = c - a;
-    Vec3i v2 = Vec3i(p.x, p.y, 0) - a;
+    Vec2f A = Vec2f(a.x, a.y);
+    Vec2f B = Vec2f(b.x, b.y);
+    Vec2f C = Vec2f(c.x, c.y);
+    Vec2f P = Vec2f(p.x, p.y);
+    Vec3f s[2];
+    for (int i=2; i--; ) {
+        s[i][0] = C[i]-A[i];
+        s[i][1] = B[i]-A[i];
+        s[i][2] = A[i]-P[i];
+    }
+    Vec3f o = cross(s[0], s[1]);
+    if (std::abs(o[2])>1e-2)
+    {
+        u=1.f-(o.x+o.y)/o.z;
+        v = o.y/o.z;
+        w = o.x/o.z;
+        return true;
+    }else
+    {
+        return false;
+    }
 
-    float d00 = CaluateDot(Vec3f(v0.x, v0.y, 0), Vec3f(v0.x, v0.y, 0));
-    float d01 = CaluateDot(Vec3f(v0.x, v0.y, 0), Vec3f(v1.x, v1.y, 0));
-    float d11 = CaluateDot(Vec3f(v1.x, v1.y, 0), Vec3f(v1.x, v1.y, 0));
-    float d20 = CaluateDot(Vec3f(v2.x, v2.y, 0), Vec3f(v0.x, v0.y, 0));
-    float d21 = CaluateDot(Vec3f(v2.x, v2.y, 0), Vec3f(v1.x, v1.y, 0));
 
-    float denom = d00 * d11 - d01 * d01;
 
-    if (denom == 0.f) return false; // 防止除以零
 
-    float invDenom = 1.0f / denom;
-
-    v = (d00 * d21 - d01 * d20) * invDenom;
-    w = (d11 * d20 - d01 * d21) * invDenom;
-    u = 1.0f - v - w;
-
-    return (u >= 0) && (v >= 0) && (w >= 0); // 判断是否在三角形内
+    
+    // // 向量差
+    // Vec3i v0 = b - a;
+    // Vec3i v1 = c - a;
+    // Vec3i v2 = Vec3i(p.x, p.y, 0) - a;
+    //
+    // float d00 = CaluateDot(Vec3f(v0.x, v0.y, 0), Vec3f(v0.x, v0.y, 0));
+    // float d01 = CaluateDot(Vec3f(v0.x, v0.y, 0), Vec3f(v1.x, v1.y, 0));
+    // float d11 = CaluateDot(Vec3f(v1.x, v1.y, 0), Vec3f(v1.x, v1.y, 0));
+    // float d20 = CaluateDot(Vec3f(v2.x, v2.y, 0), Vec3f(v0.x, v0.y, 0));
+    // float d21 = CaluateDot(Vec3f(v2.x, v2.y, 0), Vec3f(v1.x, v1.y, 0));
+    //
+    // float denom = d00 * d11 - d01 * d01;
+    //
+    // if (denom == 0.f) return false; // 防止除以零
+    //
+    // float invDenom = 1.0f / denom;
+    //
+    // v = (d00 * d21 - d01 * d20) * invDenom;
+    // w = (d11 * d20 - d01 * d21) * invDenom;
+    // u = 1.0f - v - w;
+    //
+    // return (u >= 0) && (v >= 0) && (w >= 0); // 判断是否在三角形内
 }
 
 // 3维
