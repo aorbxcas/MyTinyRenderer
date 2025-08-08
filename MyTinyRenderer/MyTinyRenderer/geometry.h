@@ -20,7 +20,7 @@ private:
 template <typename T> struct vec<2,T> {
     vec() : x(T()), y(T()) {}
     vec(T X, T Y) : x(X), y(Y) {}
-    template <typename U> vec(const vec<2,U> &v): x(v.x), y(v.y) {}
+    template <class U> vec<2,T>(const vec<2,U> &v);
           T& operator[](const size_t i)       { assert(i<2); return i<=0 ? x : y; }
     const T& operator[](const size_t i) const { assert(i<2); return i<=0 ? x : y; }
 
@@ -32,7 +32,7 @@ template <typename T> struct vec<2,T> {
 template <typename T> struct vec<3,T> {
     vec() : x(T()), y(T()), z(T()) {}
     vec(T X, T Y, T Z) : x(X), y(Y), z(Z) {}
-    template <typename U> vec(const vec<3,U> &v): x(v.x), y(v.y), z(v.z) {}
+    template <class U> vec<3,T>(const vec<3,U> &v);
           T& operator[](const size_t i)       { assert(i<3); return i<=0 ? x : (1==i ? y : z); }
     const T& operator[](const size_t i) const { assert(i<3); return i<=0 ? x : (1==i ? y : z); }
     float norm() { return std::sqrt(x*x+y*y+z*z); }
@@ -171,6 +171,16 @@ public:
         mat<DimRows,DimCols,T> ret = adjugate();
         T tmp = ret[0]*rows[0];
         return ret/tmp;
+    }
+
+    mat<DimRows,DimCols,T> invert() {
+        return invert_transpose().transpose();
+    }
+
+    mat<DimCols,DimRows,T> transpose() {
+        mat<DimCols,DimRows,T> ret;
+        for (size_t i=DimCols; i--; ret[i]=this->col(i));
+        return ret;
     }
 };
 
