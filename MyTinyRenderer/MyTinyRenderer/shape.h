@@ -38,12 +38,12 @@ void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer);
 extern Matrix ModelView;
 extern Matrix Viewport;
 extern Matrix Projection;
-
+const float depth = 2000.f;
 
 
 void viewport(int x, int y, int w, int h);
 void projection(float coeff=0.f); // coeff = -1/c
 void lookat(Vec3f eye, Vec3f center, Vec3f up);
-void Tringle(Model* model,IShader &shader, TGAImage &image,Vec3f light_dir);
+float* Tringle(Model* model,IShader &shader, TGAImage &image,Vec3f light_dir);
 
 

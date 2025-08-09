@@ -4,16 +4,17 @@
 const int width = 800;
 const int height = 800;
 Model *model = NULL;
+float *shadowbuffer = NULL;
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red = TGAColor(255, 0, 0, 255);
 const TGAColor green = TGAColor(0, 255, 0, 255);
 const TGAColor blue = TGAColor(0, 0, 255, 255);
 const char* filename2 = "D:\\DevProject\\ForkPro\\tinyrenderer\\obj\\african_head\\african_head.obj";
 
-const char* filename = "D:\\obj\\african_head\\african_head.obj";
+const char* filename = "D:\\obj\\diablo3_pose\\diablo3_pose.obj";
 
 Vec3f light_dir(1,1,1);
-Vec3f eye(1,1,3);
+Vec3f eye(-10,0,3);
 Vec3f center(0,0,0);
 Vec3f up(0,1,0);
 
@@ -27,6 +28,10 @@ struct GouraudShader : public IShader {
     mat<4,3,float> varying_tri; // triangle coordinates (clip coordinates), written by VS, read by FS
     mat<3,3,float> varying_nrm; // normal per vertex to be interpolated by FS
     mat<3,3,float> ndc_tri;     // triangle in normalized device coordinates
+
+    mat<4,4,float> uniform_Mshadow; // transform framebuffer screen coordinates to shadowbuffer screen coordinates
+    
+    GouraudShader(Matrix M, Matrix MIT, Matrix MS) : uniform_M(M), uniform_MIT(MIT), uniform_Mshadow(MS), varying_uv(), varying_tri() {}
     
     virtual Vec4f vertex(int iface, int nthvert) {
         varying_uv.set_col(nthvert, model->uv(iface, nthvert));
@@ -43,6 +48,12 @@ struct GouraudShader : public IShader {
     }
 
     virtual bool fragment(Vec3f bar, TGAColor &color) {
+        
+        Vec4f sb_p = uniform_Mshadow*embed<4>(varying_tri*bar); // corresponding point in the shadow buffer
+        sb_p = sb_p/sb_p[3];
+        int idx = int(sb_p[0]) + int(sb_p[1])*width; // index in the shadowbuffer array
+        float shadow = .3+.7*(shadowbuffer[idx]<sb_p[2]+43.34); // magic coeff to avoid z-fighting
+        
         Vec3f bn = (varying_nrm*bar).normalize();
         //float intensity = varying_intensity*bar;   // interpolate intensity for the current pixel
         Vec2f uv = varying_uv*bar;                 // interpolate uv for the current pixel
@@ -66,7 +77,7 @@ struct GouraudShader : public IShader {
         float diff = std::max(0.f, n*light_dir);
         TGAColor c = model->diffuse(uv);
         color = c;
-        for (int i=0; i<3; i++) color[i] = std::min<float>(5 + c[i]*(diff + .6*spec), 255);
+        for (int i=0; i<3; i++) color[i] = std::min<float>(20 + c[i]*shadow*(1.2f*diff + .6*spec), 255);
 
         // 世界空间法线
         // Vec3f n = proj<3>(uniform_MIT*embed<4>(model->normal(uv))).normalize();
@@ -85,11 +96,36 @@ struct GouraudShader : public IShader {
     }
 };
 
+struct DepthShader : public IShader {
+    mat<3,3,float> varying_tri;
+
+    DepthShader() : varying_tri() {}
+
+    virtual Vec4f vertex(int iface, int nthvert) {
+        Vec4f gl_Vertex = embed<4>(model->vert(iface, nthvert)); // read the vertex from .obj file
+        gl_Vertex = Viewport*Projection*ModelView*gl_Vertex;          // transform it to screen coordinates
+        varying_tri.set_col(nthvert, proj<3>(gl_Vertex/gl_Vertex[3]));
+        return gl_Vertex;
+    }
+
+    virtual bool fragment(Vec3f bar, TGAColor &color) {
+        Vec3f p = varying_tri*bar;
+        color = TGAColor(255, 255, 255)*(p.z/depth);
+        return false;
+    }
+};
+
+
 int main() {
     model = new Model(filename);
     TGAImage image(width, height, TGAImage::RGB);
     TGAImage zbuffer(width, height, TGAImage::GRAYSCALE);
+    TGAImage shadowbuffer_image(width, height, TGAImage::RGB);
 
+    shadowbuffer   = new float[width*height];
+    for (int i=width*height; --i; ) {
+        shadowbuffer[i] = -std::numeric_limits<float>::max();
+    }
     // for (int i = 0; i < model->nfaces(); i++) {
     //     std::vector<int> face = model->face(i);
     //     for (int j = 0; j < 3; j++) {
@@ -188,18 +224,42 @@ int main() {
     // delete model;
     // return 0;
 
-    lookat(eye, center, up);
-    viewport(width/8, height/8, width*3/4, height*3/4);
-    projection(-1.f/(eye-center).norm());
-    light_dir.normalize();
-    
-    GouraudShader shader;
-    shader.uniform_M   =  Projection*ModelView;
-    shader.uniform_MIT = (Projection*ModelView).invert_transpose();
-    Tringle(model, shader, image,light_dir);
-    image.flip_vertically(); // to place the origin in the bottom left corner of the image
-    image.write_tga_file("output.tga");
+    // lookat(eye, center, up);
+    // viewport(width/8, height/8, width*3/4, height*3/4);
+    // projection(-1.f/(eye-center).norm());
+    // light_dir.normalize();
+    //
+    // GouraudShader shader;
+    // shader.uniform_M   =  Projection*ModelView;
+    // shader.uniform_MIT = (Projection*ModelView).invert_transpose();
+    // Tringle(model, shader, image,light_dir);
+    // image.flip_vertically(); // to place the origin in the bottom left corner of the image
+    // image.write_tga_file("output.tga");
 
+
+    {
+        lookat(light_dir, center, up);
+        viewport(width/8, height/8, width*3/4, height*3/4);
+        projection(0);
+        light_dir.normalize();
+        
+        DepthShader shader;
+        shadowbuffer = Tringle(model, shader, shadowbuffer_image,light_dir);
+        // image.flip_vertically(); // to place the origin in the bottom left corner of the image
+        // image.write_tga_file("output.tga");
+    }
+    Matrix M = Viewport*Projection*ModelView;
+    {
+        lookat(eye, center, up);
+        viewport(width/8, height/8, width*3/4, height*3/4);
+        projection(-1.f/(eye-center).norm());
+        light_dir.normalize();
+        
+        GouraudShader shader(ModelView, (Projection*ModelView).invert_transpose(), M*(Viewport*Projection*ModelView).invert());
+        Tringle(model, shader, image,light_dir);
+        image.flip_vertically(); // to place the origin in the bottom left corner of the image
+        image.write_tga_file("output.tga");
+    }
     delete model;
     return 0;
 
