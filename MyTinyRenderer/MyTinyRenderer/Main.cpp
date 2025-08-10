@@ -1,14 +1,19 @@
 #include <iostream>
 #include "shape.h"
+#include <cstdlib>
+#include <limits>
 
 const int width = 800;
 const int height = 800;
+#define M_PI 3.14159265358979323846
 Model *model = NULL;
 float *shadowbuffer = NULL;
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red = TGAColor(255, 0, 0, 255);
 const TGAColor green = TGAColor(0, 255, 0, 255);
 const TGAColor blue = TGAColor(0, 0, 255, 255);
+TGAImage total(1024, 1024, TGAImage::GRAYSCALE);
+TGAImage occl(1024, 1024, TGAImage::GRAYSCALE);
 const char* filename2 = "D:\\DevProject\\ForkPro\\tinyrenderer\\obj\\african_head\\african_head.obj";
 
 const char* filename = "D:\\obj\\diablo3_pose\\diablo3_pose.obj";
@@ -96,6 +101,14 @@ struct GouraudShader : public IShader {
     }
 };
 
+Vec3f rand_point_on_unit_sphere() {
+    float u = (float)rand()/(float)RAND_MAX;
+    float v = (float)rand()/(float)RAND_MAX;
+    float theta = 2.f*M_PI*u;
+    float phi   = acos(2.f*v - 1.f);
+    return Vec3f(sin(phi)*cos(theta), sin(phi)*sin(theta), cos(phi));
+}
+
 struct DepthShader : public IShader {
     mat<3,3,float> varying_tri;
 
@@ -115,8 +128,47 @@ struct DepthShader : public IShader {
     }
 };
 
+struct ZShader : public IShader {
+    mat<4,3,float> varying_tri;
 
-int main() {
+    ZShader() : varying_tri() {}
+
+    virtual Vec4f vertex(int iface, int nthvert) {
+        Vec4f gl_Vertex = Projection*ModelView*embed<4>(model->vert(iface, nthvert));
+        varying_tri.set_col(nthvert, gl_Vertex);
+        return gl_Vertex;
+    }
+
+    virtual bool fragment(Vec3f gl_FragCoord, Vec3f bar, TGAColor &color) {
+        color = TGAColor(255, 255, 255)*((gl_FragCoord.z+1.f)/2.f);
+        return false;
+    }
+};
+
+struct Shader : public IShader {
+    mat<2,3,float> varying_uv;
+    mat<4,3,float> varying_tri;
+    Shader() : varying_uv(), varying_tri() {}
+
+    virtual Vec4f vertex(int iface, int nthvert) {
+        varying_uv.set_col(nthvert, model->uv(iface, nthvert));
+        Vec4f gl_Vertex = Projection*ModelView*embed<4>(model->vert(iface, nthvert));
+        varying_tri.set_col(nthvert, gl_Vertex);
+        return gl_Vertex;
+    }
+
+    virtual bool fragment(Vec3f gl_FragCoord, Vec3f bar, TGAColor &color) {
+        Vec2f uv = varying_uv*bar;
+        if (std::abs(shadowbuffer[int(gl_FragCoord.x+gl_FragCoord.y*width)]-gl_FragCoord.z<1e-2)) {
+            occl.set(uv.x*1024, uv.y*1024, TGAColor(255));
+        }
+        color = TGAColor(255, 0, 0);
+        return false;
+    }
+};
+
+void main_application() {
+    std::cout << "Running main application" << std::endl;
     model = new Model(filename);
     TGAImage image(width, height, TGAImage::RGB);
     TGAImage zbuffer(width, height, TGAImage::GRAYSCALE);
@@ -236,31 +288,77 @@ int main() {
     // image.flip_vertically(); // to place the origin in the bottom left corner of the image
     // image.write_tga_file("output.tga");
 
+    // 阴影
+    // {
+    //     lookat(light_dir, center, up);
+    //     viewport(width/8, height/8, width*3/4, height*3/4);
+    //     projection(0);
+    //     light_dir.normalize();
+    //     
+    //     DepthShader shader;
+    //     shadowbuffer = Tringle(model, shader, shadowbuffer_image,light_dir);
+    //     // image.flip_vertically(); // to place the origin in the bottom left corner of the image
+    //     // image.write_tga_file("output.tga");
+    // }
+    // Matrix M = Viewport*Projection*ModelView;
+    // {
+    //     lookat(eye, center, up);
+    //     viewport(width/8, height/8, width*3/4, height*3/4);
+    //     projection(-1.f/(eye-center).norm());
+    //     light_dir.normalize();
+    //     
+    //     GouraudShader shader(ModelView, (Projection*ModelView).invert_transpose(), M*(Viewport*Projection*ModelView).invert());
+    //     Tringle(model, shader, image,light_dir);
+    //     image.flip_vertically(); // to place the origin in the bottom left corner of the image
+    //     image.write_tga_file("output.tga");
+    // }
+    // delete model;
+}
 
+void main_test_ao() {
+    
+    std::cout << "Running test application" << std::endl;
+    model = new Model(filename);
+    TGAImage image(width, height, TGAImage::RGB);
+    TGAImage frame(width,height,TGAImage::RGB);
+
+    float* zbuffer = new float[width*height];
+    shadowbuffer = new float[width*height];
+
+    lookat(eye, center, up);
+    viewport(width/8, height/8, width*3/4, height*3/4);
+    projection(-1.f/(eye-center).norm());
+    light_dir.normalize();
+    for (int i=width*height; i--; zbuffer[i] = -std::numeric_limits<float>::max());
+    const int nrenders = 10;
+    for (int iter = 1; iter<nrenders;iter++)
     {
-        lookat(light_dir, center, up);
-        viewport(width/8, height/8, width*3/4, height*3/4);
-        projection(0);
-        light_dir.normalize();
-        
-        DepthShader shader;
-        shadowbuffer = Tringle(model, shader, shadowbuffer_image,light_dir);
-        // image.flip_vertically(); // to place the origin in the bottom left corner of the image
-        // image.write_tga_file("output.tga");
-    }
-    Matrix M = Viewport*Projection*ModelView;
-    {
+        std::cerr << iter << " from " << nrenders << std::endl;
+        for (int i=0; i<3; i++) up[i] = (float)rand()/(float)RAND_MAX;
+        eye = rand_point_on_unit_sphere();
+        eye.y = std::abs(eye.y);
+        std::cout << "v " << eye << std::endl;
+        for (int i=width*height; i--; shadowbuffer[i] = zbuffer[i] = -std::numeric_limits<float>::max());
         lookat(eye, center, up);
         viewport(width/8, height/8, width*3/4, height*3/4);
-        projection(-1.f/(eye-center).norm());
-        light_dir.normalize();
-        
-        GouraudShader shader(ModelView, (Projection*ModelView).invert_transpose(), M*(Viewport*Projection*ModelView).invert());
-        Tringle(model, shader, image,light_dir);
-        image.flip_vertically(); // to place the origin in the bottom left corner of the image
-        image.write_tga_file("output.tga");
+        projection(0);//-1.f/(eye-center).norm());
+        ZShader zshader;
+        shadowbuffer = Tringle(model, zshader, frame,light_dir);
+        Shader shader;
+        occl.clear();
+        zbuffer = Tringle(model, shader,frame, light_dir);
+        //        occl.gaussian_blur(5);
+        for (int i=0; i<1024; i++) {
+            for (int j=0; j<1024; j++) {
+                float tmp = total.get(i,j)[0];
+                total.set(i, j, TGAColor((tmp*(iter-1)+occl.get(i,j)[0])/(float)iter+.5f));
+            }
+        }
     }
-    delete model;
-    return 0;
+}
 
+
+int main() {
+    main_application();
+    return 0;
 }

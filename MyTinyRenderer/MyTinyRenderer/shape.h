@@ -3,7 +3,8 @@
 struct IShader {
     virtual ~IShader();
     virtual Vec4f vertex(int iface, int nthvert) = 0;
-    virtual bool fragment(Vec3f bar, TGAColor &color) = 0;
+    //virtual bool fragment(Vec3f bar, TGAColor &color) = 0;
+    virtual bool fragment(Vec3f gl_FragCoord = Vec3f(0,0,0), Vec3f bar, TGAColor &color) = 0;
 };
 
 enum LineType

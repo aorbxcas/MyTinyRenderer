@@ -222,7 +222,7 @@ void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer) {
                 if (alpha<0||beta<0||gamma<0)continue;
                 float z = alpha * pts[0].z + beta * pts[1].z + gamma * pts[2].z;
                 P.z = z;
-                bool discard = shader.fragment(Vec3f(alpha,beta,gamma), color);
+                bool discard = shader.fragment(Vec3f(P.x, P.y, frag_depth),Vec3f(alpha,beta,gamma), color);
                 if (zbuffer[int(P.x+P.y*image.get_width())]<P.z&&!discard) {
                     // if (zbuffer[int(P.x+P.y*image.get_width())]!=0)
                     // {
