@@ -14,21 +14,9 @@ enum LineType
 
 float CaluateCrossValue(Vec2i a, Vec2i b);
 
-float CaluateDot(Vec3f a, Vec3f b);
-
-Vec3f CaluateCross(Vec3f a, Vec3f b);
-
-bool CheckPointInTringle(Vec2i a, Vec2i b, Vec2i p);
-
-void Line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color, LineType type);
-
 float CheckPointInLine(Vec2i a, Vec2i b, Vec2i p);
 
 bool CheckPointInTrigle(Vec2i a, Vec2i b, Vec2i c, Vec2i p);
-
-void TringleSet(Vec2i t0, Vec2i t1, Vec2i t2, TGAImage &image, TGAColor color,int width,int height);
-
-void TringleSet(Vec3i t0, Vec3i t1, Vec3i t2, TGAImage &image, TGAColor color,float *zbuffer);
 
 void TriangleSet(Vec3f *pts, IShader &shader, TGAImage &image, float *zbuffer);
 
@@ -44,6 +32,10 @@ const float depth = 2000.f;
 void viewport(int x, int y, int w, int h);
 void projection(float coeff=0.f); // coeff = -1/c
 void lookat(Vec3f eye, Vec3f center, Vec3f up);
+void translate(float tx = 0, float ty = 0, float tz = 0);
+void scale(float sx = 1, float sy = 1, float sz = 1);
+void rotates(float angle_x = 0, float angle_y = 0, float angle_z = 0);
+
 float* Tringle(Model* model,IShader &shader, TGAImage &image,Vec3f light_dir);
 
 
